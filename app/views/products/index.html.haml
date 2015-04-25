@@ -1,0 +1,32 @@
+- provide(:bg_title, "our products")
+
+.main_bg
+  .wrap
+    .main
+      .top_main
+        %h2 new arrivals on ifurniture
+        %a{:href => "#"} show all
+        .clear
+      / start grids_of_3
+      .grids_of_3
+        - @new_products.each do |product|
+          .grid1_of_3
+            %a{:href => product_path(product)}
+              %img{:alt => "", :src => asset_path("pic1.jpg")}/
+              %h3= product.name
+              %span.price= "£#{product.price}"
+        .clear
+      .top_main
+        %h2 best sellers of the month
+        %a{:href => "#"} show all
+        .clear
+      / start grids_of_3
+      .grids_of_3
+        - @new_products.each do |product|
+          .grid1_of_3
+            %a{:href => product_path(product)}
+              %img{:alt => "", :src => asset_path("pic3.jpg")}/
+              %h3= product.name
+              %span.price= "£#{product.price}"
+        .clear
+      .clear

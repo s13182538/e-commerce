@@ -1,0 +1,102 @@
+- content_for :head do
+  = stylesheet_link_tag     "slider"
+  = javascript_include_tag  "jquery.eislideshow"
+  :javascript
+    $(function() {
+      $('#ei-slider').eislideshow({
+          animation     : 'center',
+          autoplay      : true,
+          slideshow_interval  : 3000,
+          titlesFactor    : 0
+        });
+      });
+
+/ start slider
+.slider
+  / -start-image-slider--
+  .image-slider
+    .wrapper
+      #ei-slider.ei-slider
+        %ul.ei-slider-large
+          - @feature_products.each do |product|
+            %li
+              %img{:alt => "image06", :src => asset_path("slider-image1.jpg")}/
+              .ei-title
+                %h3.btn= "£#{product.price}"
+                %h2
+                  = product.name
+                  %br/
+                  = product.brand.name
+                %h3.active
+                  = product.description_markup
+                %h3
+                  %a.ei_icons{:href => product_path(product)}
+                    %img{:alt => "", :src => asset_path("icon_1.png")}/
+                  %a.ei_icons{:href => product_path(product)}
+                    %img{:alt => "", :src => asset_path("icon_2.png")}/
+                  %a.ei_icons{:href => product_path(product)}
+                    %img{:alt => "", :src => asset_path("icon_3.png")}/
+                  %a.ei_icons{:href => product_path(product)}
+                    %img{:alt => "", :src => asset_path("icon_4.png")}/
+
+        / ei-slider-large
+        %ul.ei-slider-thumbs
+          %li.ei-slider-element Current
+          - @brands.each_with_index do |brand, index|
+            %li
+              %a{:href => "#"}
+                %span{:class => index == 0 ? "active" : "" }= brand.name
+              %img{:alt => "thumb01", :src => asset_path("thumbs/1.jpg")}/
+
+        / ei-slider-thumbs
+      / ei-slider
+    / wrapper
+  / -End-image-slider--
+/ start image1_of_3
+.top_bg
+  .wrap
+    .main1
+      .image1_of_3
+        %img{:alt => "", :src => asset_path("img1.jpg"), :height => 264}/
+        %a{:href => products_path}
+          %span.tag on sale
+      .image1_of_3
+        %img{:alt => "", :src => asset_path("img2.jpg"), :height => 264}/
+        %a{:href => products_path}
+          %span.tag special offers
+      .image1_of_3
+        %img{:alt => "", :src => asset_path("img3.jpg"), :height => 264}/
+        %a{:href => products_path}
+          %span.tag must have
+      .clear
+/ start main
+.main_bg
+  .wrap
+    .main
+      .top_main
+        %h2 new arrivals on ifurniture
+        %a{:href => "#"} show all
+        .clear
+      / start grids_of_3
+      .grids_of_3
+        - @new_products.each do |product|
+          .grid1_of_3
+            %a{:href => product_path(product)}
+              %img{:height => 187, :src => asset_path("pic#{product.id % 3 + 1}.jpg")}/
+              %h3= product.name
+              %span.price= "£#{product.price}"
+        .clear
+      .top_main
+        %h2 best sellers of the month
+        %a{:href => "#"} show all
+        .clear
+      / start grids_of_3
+      .grids_of_3
+        - @sellers.each do |product|
+          .grid1_of_3
+            %a{:href => product_path(product)}
+              %img{:height => 187, :src => asset_path("pic#{product.id % 3 + 1}.jpg")}/
+              %h3= product.name
+              %span.price= "£#{product.price}"
+        .clear
+      .clear

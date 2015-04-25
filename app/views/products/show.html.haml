@@ -1,0 +1,155 @@
+- content_for :head do
+  = javascript_include_tag  "jquery.fancybox.pack"
+
+- provide(:bg_title, "ifurniture")
+
+:javascript
+  jQuery(document).ready(function(){
+      // This button will increment the value
+      $('.qtyplus').click(function(e){
+          // Stop acting like a button
+          e.preventDefault();
+          // Get the field name
+          fieldName = $(this).attr('field');
+          // Get its current value
+          var currentVal = parseInt($('input[name='+fieldName+']').val());
+          // If is not undefined
+          if (!isNaN(currentVal)) {
+              // Increment
+              $('input[name='+fieldName+']').val(currentVal + 1);
+          } else {
+              // Otherwise put a 0 there
+              $('input[name='+fieldName+']').val(0);
+          }
+      });
+      // This button will decrement the value till 0
+      $(".qtyminus").click(function(e) {
+          // Stop acting like a button
+          e.preventDefault();
+          // Get the field name
+          fieldName = $(this).attr('field');
+          // Get its current value
+          var currentVal = parseInt($('input[name='+fieldName+']').val());
+          // If it isn't undefined or its greater than 0
+          if (!isNaN(currentVal) && currentVal > 0) {
+              // Decrement one
+              $('input[name='+fieldName+']').val(currentVal - 1);
+          } else {
+              // Otherwise put a 0 there
+              $('input[name='+fieldName+']').val(0);
+          }
+      });
+  });
+
+
+.main_bg
+  .wrap
+    .main
+      / start content
+      .single
+        / start span1_of_1
+        .left_content
+          .span1_of_1
+            / start product_slider
+            .product-view
+              .product-essential
+                .product-img-box
+                  .more-views
+                    .more-views-container
+                      %ul
+                        %li
+                          %a.cs-fancybox-thumbs{:alt => "", "data-fancybox-group" => "thumb", :href => "", :title => ""}
+                            %img{:alt => "", :src => "", :src_main => "", :title => ""}/
+                        %li
+                          %a.cs-fancybox-thumbs{:alt => "", "data-fancybox-group" => "thumb", :href => "", :title => ""}
+                            %img{:alt => "", :src => "", :src_main => "", :title => ""}/
+                        %li
+                          %a.cs-fancybox-thumbs{:alt => "", "data-fancybox-group" => "thumb", :href => "", :title => ""}
+                            %img{:alt => "", :src => "", :src_main => "", :title => ""}/
+                        %li
+                          %a.cs-fancybox-thumbs{:alt => "", "data-fancybox-group" => "thumb", :href => "", :title => ""}
+                            %img{:alt => "", :src => "", :src_main => "", :title => ""}/
+                        %li
+                          %a.cs-fancybox-thumbs{:alt => "", "data-fancybox-group" => "thumb", :href => "", :title => ""}
+                            %img{:alt => "", :src => "", :src_main => "", :title => ""}/
+                  .product-image
+                    %a.cs-fancybox-thumbs.cloud-zoom{:alt => "Women Shorts", "data-fancybox-group" => "thumb", :href => asset_path("0001-2.jpg"), :rel => "adjustX:30,adjustY:0,position:'right',tint:'#202020',tintOpacity:0.5,smoothMove:2,showTitle:true,titleOpacity:0.5", :title => "Women Shorts"}
+                      %img{:alt => "Women Shorts", :src => asset_path("0001-2.jpg"), :title => "Women Shorts"}/
+
+          / start span1_of_1
+          .span1_of_1_des
+            .desc1
+              %h3= @product.name
+              %h5= "£#{@product.price}"
+              .available
+                .btn_form
+                  %form
+                    #qty_selector
+                      %input.qtyminus{:field => "quantity", :type => "button", :value => "-"}/
+                      %input.qty{:name => "quantity", :type => "number", :value => "1", :min => "1", :max => @product.qty}/
+                      %input.qtyplus{:field => "quantity", :type => "button", :value => "+"}/
+
+                    = link_to "", class: "button", data: {target: @cart_action, addUrl: add_to_cart_path(@product), removeUrl: remove_from_cart_path(@product)} do
+                      %i.fi-shopping-cart
+                      %span= @cart_action
+                      Cart
+                %p= @product.description_markup
+              .share-desc
+                .share
+                  %h4 Share Product :
+                  %ul.share_nav
+                    %li
+                      %a{:href => "#"}
+                        %img{:src => asset_path("facebook.png"), :title => "facebook"}/
+                    %li
+                      %a{:href => "#"}
+                        %img{:src => asset_path("twitter.png"), :title => "Twiiter"}/
+                    %li
+                      %a{:href => "#"}
+                        %img{:src => asset_path("rss.png"), :title => "Rss"}/
+                    %li
+                      %a{:href => "#"}
+                        %img{:src => asset_path("gpluse.png"), :title => "Google+"}/
+                .clear
+          .clear
+          / start left content_bottom
+          .left_content_btm
+            %p.para= @product.description
+            / start tabs
+            %section.tabs
+              %input#tab-1.tab-selector-1{:checked => "checked", :name => "radio-set", :type => "radio"}/
+              %label.tab-label-1{:for => "tab-1"} overview
+              %input#tab-2.tab-selector-2{:name => "radio-set", :type => "radio"}/
+              %label.tab-label-2{:for => "tab-2"} consumer
+              %input#tab-3.tab-selector-3{:name => "radio-set", :type => "radio"}/
+              %label.tab-label-3{:for => "tab-3"} semiconductor
+              .clear-shadow
+              .content
+                .content-1
+                  %p.para.top
+                    %span= @product.description
+                  .clear
+                .content-2
+                  %p.para
+                    %span WELCOME
+                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections
+                  %ul.qua_nav
+                    %li Multimedia Systems
+                    %li Digital media adapters
+                    %li Set top boxes for HDTV and IPTV Player applications on various Operating Systems and Hardware Platforms
+                .content-3
+                  %p.para.top
+                    %span LOREM IPSUM
+                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined
+                  %ul
+                    %li Research
+                    %li Design and Development
+                    %li Porting and Optimization
+                    %li System integration
+                    %li Verification, Validation and Testing
+                    %li Maintenance and Support
+                  .clear
+            / end tabs
+          / end left content_bottom
+        .clear
+      / end content

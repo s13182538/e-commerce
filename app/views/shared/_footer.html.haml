@@ -1,0 +1,35 @@
+/ start footer
+.footer_bg
+  .wrap
+    .footer
+      / scroll_top_btn
+      :javascript
+        $(document).ready(function() {
+          var defaults = {
+            containerID: 'toTop',
+            containerHoverID: 'toTopHover',
+            scrollSpeed: 1200,
+            easingType: 'linear'
+          };
+          $().UItoTop({ easingType: 'easeOutQuart' });
+        });
+      %a#toTop{:href => "#", :style => "display: block;"}
+        %span#toTopHover{:style => "opacity: 1;"}
+      / end scroll_top_btn
+      .f_nav1
+        %ul
+          %li
+            %a{:href => root_path} home /
+          %li
+            %a{:href => products_path} products /
+          %li
+            %a{:href => about_path} about /
+          %li
+            %a{:href => cart_path} carts /
+          %li
+            %a{:href => contact_path} contact
+      .copy
+        %p.link
+          %span
+            © All rights reserved
+      .clear

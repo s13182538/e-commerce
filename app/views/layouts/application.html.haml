@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %title Ecommerce
+    %link{:href => "https://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500", :rel => "stylesheet", :type => "text/css"}/
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+
+    = javascript_include_tag "jquery.mmenu"
+    :javascript
+      //  The menu on the left
+      $(function() {
+        $('nav#menu-left').mmenu();
+      });
+    = yield(:head)
+
+    = javascript_include_tag "easing"
+    = javascript_include_tag "move-top"
+    :javascript
+      jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){
+          event.preventDefault();
+          $('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+        });
+      });
+    = csrf_meta_tags
+  %body
+    = render "shared/header"
+    = render "shared/top_bg"
+    = yield
+    = render "shared/footer"
+    = debug(params) if Rails.env.development?
